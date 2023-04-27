@@ -6,8 +6,10 @@
   <title>magento.models.product &mdash; MyMagento 2.1.1 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/github_style.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+    <link rel="canonical" href="https://my-magento.readthedocs.io/en/latest/_modules/magento/models/product.html" />
   <!--[if lt IE 9]>
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -828,7 +830,7 @@
                 <span class="n">base_sku</span> <span class="o">=</span> <span class="n">option</span><span class="p">[</span><span class="s1">&#39;product_sku&#39;</span><span class="p">]</span>
                 <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">option</span><span class="p">[</span><span class="s1">&#39;values&#39;</span><span class="p">]:</span>
                     <span class="k">if</span> <span class="n">val</span><span class="o">.</span><span class="kp">get</span><span class="p">(</span><span class="s1">&#39;sku&#39;</span><span class="p">):</span>
-                        <span class="n">option_skus</span><span class="o">.</span><span class="kp">append</span><span class="p">(</span><span class="n">base_sku</span> <span class="o">+</span> <span class="s1">&#39;-&#39;</span> <span class="o">+</span> <span class="n">val</span><span class="p">[</span><span class="s1">&#39;sku&#39;</span><span class="p">])</span>
+                        <span class="n">option_skus</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">base_sku</span> <span class="o">+</span> <span class="s1">&#39;-&#39;</span> <span class="o">+</span> <span class="n">val</span><span class="p">[</span><span class="s1">&#39;sku&#39;</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">option_skus</span>
 
     <span class="nd">@property</span>
@@ -873,7 +875,7 @@
     <span class="n">DOCUMENTATION</span> <span class="o">=</span> <span class="s2">&quot;https://adobe-commerce.redoc.ly/2.3.7-admin/tag/productsskumediaentryId&quot;</span>
     <span class="n">IDENTIFIER</span> <span class="o">=</span> <span class="s2">&quot;id&quot;</span>
 
-<div class="viewcode-block" id="MediaEntry.__init__"><a class="viewcode-back" href="../../../product.html#magento.models.product.MediaEntry.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="kp">product</span><span class="p">:</span> <span class="n">Product</span><span class="p">,</span> <span class="n">entry</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+<div class="viewcode-block" id="MediaEntry.__init__"><a class="viewcode-back" href="../../../product.html#magento.models.product.MediaEntry.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">product</span><span class="p">:</span> <span class="n">Product</span><span class="p">,</span> <span class="n">entry</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize a MediaEntry object for a :class:`Product`</span>
 
 <span class="sd">        :param product: the :class:`Product` that the gallery entry is associated with</span>
@@ -881,13 +883,13 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
             <span class="n">data</span><span class="o">=</span><span class="n">entry</span><span class="p">,</span>
-            <span class="n">client</span><span class="o">=</span><span class="kp">product</span><span class="o">.</span><span class="n">client</span><span class="p">,</span>
-            <span class="n">endpoint</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;products/</span><span class="si">{</span><span class="kp">product</span><span class="o">.</span><span class="n">encoded_sku</span><span class="si">}</span><span class="s1">/media&#39;</span>
+            <span class="n">client</span><span class="o">=</span><span class="n">product</span><span class="o">.</span><span class="n">client</span><span class="p">,</span>
+            <span class="n">endpoint</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;products/</span><span class="si">{</span><span class="n">product</span><span class="o">.</span><span class="n">encoded_sku</span><span class="si">}</span><span class="s1">/media&#39;</span>
         <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="kp">product</span> <span class="o">=</span> <span class="kp">product</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">product</span> <span class="o">=</span> <span class="n">product</span></div>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;MediaEntry </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2"> for </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="kp">product</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="si">}</span><span class="s2">&gt;&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;MediaEntry </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2"> for </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">product</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="si">}</span><span class="s2">&gt;&quot;</span>
 
 <div class="viewcode-block" id="MediaEntry.query_endpoint"><a class="viewcode-back" href="../../../product.html#magento.models.product.MediaEntry.query_endpoint">[docs]</a>    <span class="k">def</span> <span class="nf">query_endpoint</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;No search endpoint exists for media gallery entries&quot;&quot;&quot;</span>
@@ -935,7 +937,7 @@
 <span class="sd">        :param scope: the scope to send the request on; will use the :attr:`.Client.scope` if not provided</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">media_type</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">MEDIA_TYPES</span> <span class="ow">and</span> <span class="n">media_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">types</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;types&#39;</span><span class="p">]</span><span class="o">.</span><span class="kp">append</span><span class="p">(</span><span class="n">media_type</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;types&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">media_type</span><span class="p">)</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="kp">update</span><span class="p">(</span><span class="n">scope</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="MediaEntry.remove_media_type"><a class="viewcode-back" href="../../../product.html#magento.models.product.MediaEntry.remove_media_type">[docs]</a>    <span class="k">def</span> <span class="nf">remove_media_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">media_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">scope</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
@@ -1005,7 +1007,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="kp">refresh</span><span class="p">(</span><span class="n">scope</span><span class="p">)</span>  <span class="c1"># Get updated data if success or reset to accurate data if failed</span>
 
         <span class="k">if</span> <span class="n">success</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="kp">product</span><span class="o">.</span><span class="kp">refresh</span><span class="p">(</span><span class="n">scope</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">product</span><span class="o">.</span><span class="kp">refresh</span><span class="p">(</span><span class="n">scope</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">success</span></div>
 

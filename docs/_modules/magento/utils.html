@@ -6,8 +6,10 @@
   <title>magento.utils &mdash; MyMagento 2.1.1 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/github_style.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+    <link rel="canonical" href="https://my-magento.readthedocs.io/en/latest/_modules/magento/utils.html" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -488,12 +490,12 @@
 <div class="viewcode-block" id="ItemManager.__init__"><a class="viewcode-back" href="../../utils.html#magento.utils.ItemManager.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="kp">items</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="kp">items</span> <span class="o">=</span> <span class="kp">items</span> <span class="k">if</span> <span class="kp">items</span> <span class="k">else</span> <span class="p">[]</span></div>
 
-<div class="viewcode-block" id="ItemManager.add"><a class="viewcode-back" href="../../utils.html#magento.utils.ItemManager.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="kp">item</span><span class="p">):</span>
-        <span class="k">if</span> <span class="kp">item</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="kp">items</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="kp">items</span><span class="o">.</span><span class="kp">append</span><span class="p">(</span><span class="kp">item</span><span class="p">)</span></div>
+<div class="viewcode-block" id="ItemManager.add"><a class="viewcode-back" href="../../utils.html#magento.utils.ItemManager.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">item</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="kp">items</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="kp">items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="ItemManager.get_attrs"><a class="viewcode-back" href="../../utils.html#magento.utils.ItemManager.get_attrs">[docs]</a>    <span class="k">def</span> <span class="nf">get_attrs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr</span><span class="p">):</span>
-        <span class="k">return</span> <span class="p">[</span><span class="nb">getattr</span><span class="p">(</span><span class="kp">item</span><span class="p">,</span> <span class="n">attr</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="kp">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="kp">items</span><span class="p">]</span></div>
+        <span class="k">return</span> <span class="p">[</span><span class="nb">getattr</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">attr</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="kp">items</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="ItemManager.sum_attrs"><a class="viewcode-back" href="../../utils.html#magento.utils.ItemManager.sum_attrs">[docs]</a>    <span class="k">def</span> <span class="nf">sum_attrs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="kp">get_attrs</span><span class="p">(</span><span class="n">attr</span><span class="p">))</span></div></div>
@@ -775,7 +777,7 @@
     <span class="k">def</span> <span class="nf">owns_handler</span><span class="p">(</span><span class="n">handler</span><span class="p">:</span> <span class="n">Handler</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Checks if a handler is a Stream/FileHandler from this package or not&quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>  <span class="c1"># Match handler name to MagentoLogger.HANDLER_NAME format</span>
-            <span class="n">prefix</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">stdout_level</span> <span class="o">=</span> <span class="n">handler</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="kp">split</span><span class="p">(</span><span class="s1">&#39;__&#39;</span><span class="p">)</span>
+            <span class="n">prefix</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">stdout_level</span> <span class="o">=</span> <span class="n">handler</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;__&#39;</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">prefix</span> <span class="o">==</span> <span class="n">MagentoLogger</span><span class="o">.</span><span class="n">PREFIX</span>
         <span class="k">except</span><span class="p">:</span>  <span class="c1"># Wrong format or not set</span>
             <span class="k">return</span> <span class="kc">False</span></div>
@@ -818,12 +820,12 @@
 <div class="viewcode-block" id="get_agents"><a class="viewcode-back" href="../../utils.html#magento.utils.get_agents">[docs]</a><span class="k">def</span> <span class="nf">get_agents</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Scrapes a list of user agents. Returns a default list if the scrape fails.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">response</span> <span class="o">:=</span> <span class="n">requests</span><span class="o">.</span><span class="kp">get</span><span class="p">(</span><span class="s1">&#39;https://www.whatismybrowser.com/guides/the-latest-user-agent/chrome&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">ok</span><span class="p">:</span>
-        <span class="n">section</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="kp">split</span><span class="p">(</span><span class="s1">&#39;&lt;h2&gt;Latest Chrome on Windows 10 User Agents&lt;/h2&gt;&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">raw_agents</span> <span class="o">=</span> <span class="n">section</span><span class="o">.</span><span class="kp">split</span><span class="p">(</span><span class="s1">&#39;code</span><span class="se">\&quot;</span><span class="s1">&gt;&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]</span>
-        <span class="n">agents</span> <span class="o">=</span> <span class="p">[</span><span class="n">agent</span><span class="o">.</span><span class="kp">split</span><span class="p">(</span><span class="s1">&#39;&lt;&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">raw_agents</span><span class="p">]</span>
+        <span class="n">section</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;&lt;h2&gt;Latest Chrome on Windows 10 User Agents&lt;/h2&gt;&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">raw_agents</span> <span class="o">=</span> <span class="n">section</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;code</span><span class="se">\&quot;</span><span class="s1">&gt;&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="n">agents</span> <span class="o">=</span> <span class="p">[</span><span class="n">agent</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;&lt;&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">raw_agents</span><span class="p">]</span>
         <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">agents</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">a</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">AGENTS</span><span class="p">:</span>
-                <span class="n">AGENTS</span><span class="o">.</span><span class="kp">append</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+                <span class="n">AGENTS</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
     <span class="c1"># If function fails, will still return the hardcoded list</span>
     <span class="k">return</span> <span class="n">AGENTS</span></div>
 

@@ -6,8 +6,10 @@
   <title>magento.clients &mdash; MyMagento 2.1.1 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/github_style.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+    <link rel="canonical" href="https://my-magento.readthedocs.io/en/latest/_modules/magento/clients.html" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -576,12 +578,12 @@
 <div class="viewcode-block" id="Client.load"><a class="viewcode-back" href="../../clients.html#magento.clients.Client.load">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">pickle_bytes</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Client</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize a :class:`~.Client` using a pickle bytestring from :meth:`~.to_pickle`&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">pickle</span><span class="o">.</span><span class="kp">loads</span><span class="p">(</span><span class="n">pickle_bytes</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">pickle</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">pickle_bytes</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Client.from_json"><a class="viewcode-back" href="../../clients.html#magento.clients.Client.from_json">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_json</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">json_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Client</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize a :class:`~.Client` from a JSON string of settings&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="kp">loads</span><span class="p">(</span><span class="n">json_str</span><span class="p">))</span></div>
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">json_str</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="Client.from_dict"><a class="viewcode-back" href="../../clients.html#magento.clients.Client.from_dict">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">d</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Client</span><span class="p">:</span>
@@ -784,7 +786,7 @@
 <span class="sd">        :param log_requests: if ``True``, adds the :class:`~.FileHandler` to the :mod:`~.urllib3.connectionpool` logger</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">logger_name</span> <span class="o">=</span> <span class="n">MagentoLogger</span><span class="o">.</span><span class="n">CLIENT_LOG_NAME</span><span class="o">.</span><span class="kp">format</span><span class="p">(</span>
-            <span class="n">domain</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="kp">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span>
+            <span class="n">domain</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span>
             <span class="n">username</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">USER_CREDENTIALS</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span>
         <span class="p">)</span>   <span class="c1"># Example:``domain_username``</span>
         <span class="k">return</span> <span class="n">MagentoLogger</span><span class="p">(</span>
@@ -819,7 +821,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="kp">validate</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="kp">validate</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">pickle</span><span class="o">.</span><span class="kp">dumps</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">pickle</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Client.to_json"><a class="viewcode-back" href="../../clients.html#magento.clients.Client.to_json">[docs]</a>    <span class="k">def</span> <span class="nf">to_json</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="kp">validate</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Serializes the Client to a JSON string</span>
@@ -827,7 +829,7 @@
 <span class="sd">        :param validate: if ``True``, validates the :attr:`token`/:attr:`USER_CREDENTIALS` before serializing</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="kp">to_dict</span><span class="p">(</span><span class="kp">validate</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="kp">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Client.to_dict"><a class="viewcode-back" href="../../clients.html#magento.clients.Client.to_dict">[docs]</a>    <span class="k">def</span> <span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="kp">validate</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Serializes the Client to a dictionary</span>

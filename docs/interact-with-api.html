@@ -8,6 +8,7 @@
   <title>Interacting with the API &mdash; MyMagento 2.1.1 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/github_style.css" type="text/css" />
       <link rel="stylesheet" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" type="text/css" />
       <link rel="stylesheet" href="_static/custom.css" type="text/css" />
     <link rel="canonical" href="https://my-magento.readthedocs.io/en/latest/interact-with-api.html" />
@@ -469,7 +470,7 @@
       <li><a href="contents.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">Interacting with the API</li>
       <li class="wy-breadcrumbs-aside">
-              <a href="https://github.com/TDKorn/my-magento/blob/v2.1.1interact-with-api.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/TDKorn/my-magento/blob/interact-with-api.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="index.html" class="btn btn-neutral float-left" title="MyMagento - Python Magento 2 REST API Wrapper" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
@@ -498,7 +499,7 @@ allowing you to retrieve data about</p>
 <p class="admonition-title">From the Docs…</p>
 <dl class="py method">
 <dt class="sig sig-object py">
-<span class="sig-prename descclassname"><span class="pre">Client.</span></span><span class="sig-name descname"><span class="pre">search</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">endpoint</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/magento/clients.html#Client.search"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference external" href="https://github.com/tdkorn/my-magento/blob/v2.1.1/magento/clients.py#L142-L165"><span class="linkcode-link"><span class="pre">View</span> <span class="pre">on</span> <span class="pre">GitHub</span></span></a></dt>
+<span class="sig-prename descclassname"><span class="pre">Client.</span></span><span class="sig-name descname"><span class="pre">search</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">endpoint</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/magento/clients.html#Client.search"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="reference external" href="https://github.com/TDKorn/my-magento/blob/main/magento/clients.py#L142-L165"><span class="linkcode-link"><span class="pre">View</span> <span class="pre">on</span> <span class="pre">GitHub</span></span></a></dt>
 <dd><p>Initializes and returns a <a class="reference internal" href="search_module.html#magento.search.SearchQuery" title="magento.search.SearchQuery"><code class="xref py py-class docutils literal notranslate"><span class="pre">SearchQuery</span></code></a> corresponding to the specified endpoint</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -546,14 +547,14 @@ will be returned, which wraps the <a class="reference internal" href="search_mod
 </div>
 <p>We can search for orders containing this product as follows:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Using the Product itself</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="kp">product</span><span class="o">.</span><span class="kp">get_orders</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">product</span><span class="o">.</span><span class="kp">get_orders</span><span class="p">()</span>
 
 <span class="p">[</span><span class="o">&lt;</span><span class="n">Magento</span> <span class="n">Order</span><span class="p">:</span> <span class="s2">&quot;#000000003&quot;</span> <span class="n">placed</span> <span class="n">on</span> <span class="mi">2022</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">21</span> <span class="mi">08</span><span class="p">:</span><span class="mi">09</span><span class="p">:</span><span class="mi">33</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">...</span> <span class="p">]</span>
 
 <span class="c1"># Using an OrderSearch</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">api</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="kp">by_product</span><span class="p">(</span><span class="kp">product</span><span class="p">)</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">api</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="kp">by_product_id</span><span class="p">(</span><span class="kp">product</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">api</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="kp">by_sku</span><span class="p">(</span><span class="kp">product</span><span class="o">.</span><span class="n">sku</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">api</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="kp">by_product</span><span class="p">(</span><span class="n">product</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">api</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="kp">by_product_id</span><span class="p">(</span><span class="n">product</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">api</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="kp">by_sku</span><span class="p">(</span><span class="n">product</span><span class="o">.</span><span class="n">sku</span><span class="p">)</span>
 
 <span class="p">[</span><span class="o">&lt;</span><span class="n">Magento</span> <span class="n">Order</span><span class="p">:</span> <span class="s2">&quot;#000000003&quot;</span> <span class="n">placed</span> <span class="n">on</span> <span class="mi">2022</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">21</span> <span class="mi">08</span><span class="p">:</span><span class="mi">09</span><span class="p">:</span><span class="mi">33</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">...</span> <span class="p">]</span>
 </pre></div>
@@ -570,8 +571,8 @@ will be returned, which wraps the <a class="reference internal" href="search_mod
 </div>
 <p class="rubric">Example: Updating the Thumbnail <a class="reference internal" href="product.html#magento.models.product.MediaEntry" title="magento.models.product.MediaEntry"><code class="xref py py-class docutils literal notranslate"><span class="pre">MediaEntry</span></code></a> of a <a class="reference internal" href="product.html#magento.models.product.Product" title="magento.models.product.Product"><code class="xref py py-class docutils literal notranslate"><span class="pre">Product</span></code></a></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span> <span class="c1"># Update product thumbnail label on specific store view</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="kp">product</span><span class="o">.</span><span class="n">thumbnail</span><span class="o">.</span><span class="kp">set_alt_text</span><span class="p">(</span><span class="s2">&quot;bonjour&quot;</span><span class="p">,</span> <span class="n">scope</span><span class="o">=</span><span class="s2">&quot;FR&quot;</span><span class="p">)</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="kp">product</span><span class="o">.</span><span class="n">thumbnail</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">product</span><span class="o">.</span><span class="n">thumbnail</span><span class="o">.</span><span class="kp">set_alt_text</span><span class="p">(</span><span class="s2">&quot;bonjour&quot;</span><span class="p">,</span> <span class="n">scope</span><span class="o">=</span><span class="s2">&quot;FR&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">product</span><span class="o">.</span><span class="n">thumbnail</span><span class="p">)</span>
 
  <span class="o">&lt;</span><span class="n">MediaEntry</span> <span class="mi">3417</span> <span class="k">for</span> <span class="o">&lt;</span><span class="n">Magento</span> <span class="n">Product</span><span class="p">:</span> <span class="mi">24</span><span class="o">-</span><span class="n">MB01</span><span class="o">&gt;</span><span class="p">:</span> <span class="n">bonjour</span><span class="o">&gt;</span>
 </pre></div>

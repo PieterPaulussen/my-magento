@@ -6,8 +6,10 @@
   <title>magento.models.invoice &mdash; MyMagento 2.1.1 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/github_style.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+    <link rel="canonical" href="https://my-magento.readthedocs.io/en/latest/_modules/magento/models/invoice.html" />
   <!--[if lt IE 9]>
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -529,8 +531,8 @@
     <span class="nd">@cached_property</span>
     <span class="k">def</span> <span class="nf">items</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">InvoiceItem</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;The invoiced items, returned as a list of :class:`InvoiceItem` objects&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">[</span><span class="n">InvoiceItem</span><span class="p">(</span><span class="kp">item</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span> <span class="k">for</span> <span class="kp">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__items</span>
-                <span class="k">if</span> <span class="kp">item</span><span class="p">[</span><span class="s1">&#39;order_item_id&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="o">.</span><span class="n">item_ids</span><span class="p">]</span></div>
+        <span class="k">return</span> <span class="p">[</span><span class="n">InvoiceItem</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__items</span>
+                <span class="k">if</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;order_item_id&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="o">.</span><span class="n">item_ids</span><span class="p">]</span></div>
 
 
 <div class="viewcode-block" id="InvoiceItem"><a class="viewcode-back" href="../../../invoice.html#magento.models.invoice.InvoiceItem">[docs]</a><span class="k">class</span> <span class="nc">InvoiceItem</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
@@ -540,14 +542,14 @@
     <span class="n">DOCUMENTATION</span> <span class="o">=</span> <span class="s2">&quot;https://adobe-commerce.redoc.ly/2.3.7-admin/tag/invoicesid&quot;</span>
     <span class="n">IDENTIFIER</span> <span class="o">=</span> <span class="s1">&#39;entity_id&#39;</span>
 
-<div class="viewcode-block" id="InvoiceItem.__init__"><a class="viewcode-back" href="../../../invoice.html#magento.models.invoice.InvoiceItem.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="kp">item</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">invoice</span><span class="p">:</span> <span class="n">Invoice</span><span class="p">):</span>
+<div class="viewcode-block" id="InvoiceItem.__init__"><a class="viewcode-back" href="../../../invoice.html#magento.models.invoice.InvoiceItem.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">invoice</span><span class="p">:</span> <span class="n">Invoice</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize an InvoiceItem of an :class:`Invoice`</span>
 
 <span class="sd">        :param item: API response to use as source data</span>
 <span class="sd">        :param invoice: the :class:`Invoice` that this is an item of</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
-            <span class="n">data</span><span class="o">=</span><span class="kp">item</span><span class="p">,</span>
+            <span class="n">data</span><span class="o">=</span><span class="n">item</span><span class="p">,</span>
             <span class="n">client</span><span class="o">=</span><span class="n">invoice</span><span class="o">.</span><span class="n">client</span><span class="p">,</span>
             <span class="n">endpoint</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;invoices/</span><span class="si">{</span><span class="n">invoice</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s1">&#39;</span>
         <span class="p">)</span>
@@ -576,14 +578,14 @@
     <span class="nd">@cached_property</span>
     <span class="k">def</span> <span class="nf">order_item</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">OrderItem</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;The item&#39;s corresponding :class:`~.OrderItem`&quot;&quot;&quot;</span>
-        <span class="k">for</span> <span class="kp">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="o">.</span><span class="kp">items</span><span class="p">:</span>
-            <span class="k">if</span> <span class="kp">item</span><span class="o">.</span><span class="n">item_id</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">order_item_id</span><span class="p">:</span>
-                <span class="k">return</span> <span class="kp">item</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="o">.</span><span class="kp">items</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">item</span><span class="o">.</span><span class="n">item_id</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">order_item_id</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">item</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">product</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Product</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;The item&#39;s corresponding simple :class:`~.Product`&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">order_item</span><span class="o">.</span><span class="kp">product</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">order_item</span><span class="o">.</span><span class="n">product</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">product_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
