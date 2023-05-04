@@ -506,7 +506,7 @@
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>client</strong> (<a class="reference internal" href="clients.html#magento.clients.Client" title="magento.clients.Client"><em>Client</em></a>) – an initialized <a class="reference internal" href="clients.html#magento.clients.Client" title="magento.clients.Client"><code class="xref py py-class docutils literal notranslate"><span class="pre">Client</span></code></a> object</p></li>
 <li><p><strong>msg</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em>) – optional exception message; prepended to the error message of the response</p></li>
-<li><p><strong>response</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://requests.readthedocs.io/en/latest/api/#requests.Response" title="(in Requests v2.29.0)"><em>Response</em></a><em>]</em>) – optional response to <a class="reference internal" href="#magento.exceptions.MagentoError.parse" title="magento.exceptions.MagentoError.parse"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse()</span></code></a> an error message from</p></li>
+<li><p><strong>response</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://requests.readthedocs.io/en/latest/api/#requests.Response" title="(in Requests v2.30.0)"><em>Response</em></a><em>]</em>) – optional response to <a class="reference internal" href="#magento.exceptions.MagentoError.parse" title="magento.exceptions.MagentoError.parse"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parse()</span></code></a> an error message from</p></li>
 </ul>
 </dd>
 </dl>
@@ -518,10 +518,10 @@
 <dd><p>Parses the error message from the <code class="docutils literal notranslate"><span class="pre">response</span></code></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>response</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.11)"><em>Union</em></a><em>[</em><a class="reference external" href="https://requests.readthedocs.io/en/latest/api/#requests.Response" title="(in Requests v2.29.0)"><em>Response</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.11)"><em>Dict</em></a><em>]</em>) – a bad response returned by the Magento API</p>
+<dd class="field-odd"><p><strong>response</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.11)"><em>Union</em></a><em>[</em><a class="reference external" href="https://requests.readthedocs.io/en/latest/api/#requests.Response" title="(in Requests v2.30.0)"><em>Response</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.11)"><em>Dict</em></a><em>]</em>) – a bad response returned by the Magento API</p>
 </dd>
 <dt class="field-even">Raises</dt>
-<dd class="field-even"><p>TypeError if <code class="docutils literal notranslate"><span class="pre">response</span></code> is not a <a class="reference external" href="https://requests.readthedocs.io/en/latest/api/#requests.Response" title="(in Requests v2.29.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code></a> or <code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></p>
+<dd class="field-even"><p>TypeError if <code class="docutils literal notranslate"><span class="pre">response</span></code> is not a <a class="reference external" href="https://requests.readthedocs.io/en/latest/api/#requests.Response" title="(in Requests v2.30.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Response</span></code></a> or <code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a></p>
@@ -552,7 +552,7 @@
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>client</strong> (<a class="reference internal" href="clients.html#magento.clients.Client" title="magento.clients.Client"><em>Client</em></a>) – an initialized <a class="reference internal" href="clients.html#magento.clients.Client" title="magento.clients.Client"><code class="xref py py-class docutils literal notranslate"><span class="pre">Client</span></code></a> object</p></li>
 <li><p><strong>msg</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>]</em>) – optional exception message; prepended to the error message of the response</p></li>
-<li><p><strong>response</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://requests.readthedocs.io/en/latest/api/#requests.Response" title="(in Requests v2.29.0)"><em>Response</em></a><em>]</em>) – optional response to <code class="xref py py-meth docutils literal notranslate"><span class="pre">parse()</span></code> an error message from</p></li>
+<li><p><strong>response</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://requests.readthedocs.io/en/latest/api/#requests.Response" title="(in Requests v2.30.0)"><em>Response</em></a><em>]</em>) – optional response to <code class="xref py py-meth docutils literal notranslate"><span class="pre">parse()</span></code> an error message from</p></li>
 </ul>
 </dd>
 </dl>
