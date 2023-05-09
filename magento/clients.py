@@ -1,7 +1,9 @@
 from __future__ import annotations
+import logging
 import json
 import pickle
 import requests
+from requests_oauthlib import OAuth1Session
 from functools import cached_property
 from typing import Optional, Dict, List
 from .utils import MagentoLogger, get_agent
@@ -467,3 +469,117 @@ class Store:
         for key in cached:
             self.__dict__.pop(key, None)
         return True
+
+
+class OauthClient(Client):
+
+    def __init__(
+        self,
+        domain: str,
+        token: str,
+        token_secret: str,
+        resource_owner_key: str,
+        resource_owner_secret: str,
+        scope: Optional[str] = '',
+        local: bool = False,
+        user_agent: Optional[str] = None,
+        logger: Optional[logging.Logger] = None,
+        log_level: str = 'INFO',
+        **kwargs
+    ):
+        """Initialize a Client
+
+        .. admonition:: Important!
+           :class: important-af
+
+           The Magento account you use to log in must be assigned a **User Role** that has
+           the appropriate API resources included in its **Resource Access** settings
+
+           This can be verified in Magento Admin by going to::
+
+            System -> Permissions -> User Roles -> {Role} -> Role Resources -> Resource Access
+
+           and ensuring that ``Sales``, ``Catalog``, ``Customers``, and any other desired resources are included
+
+
+        :param domain: domain name of the Magento store (ex. ``domain.com`` or ``127.0.0.1/magento24``)
+        :param username: username of the Magento Admin account
+        :param password: password of the Magento Admin account
+        :param scope: the store view scope to :meth:`~search` and make requests on
+        :param local: whether the Magento store is hosted locally
+        :param user_agent: the user agent to use in requests
+        :param token: an existing access token
+        :param log_level: the logging level for logging to stdout
+        :param login: if ``True``, calls :meth:`~.authenticate` upon initialization
+        :param kwargs: see below
+
+        ...
+
+        :Extra Keyword Arguments:
+            * **log_file** (``str``) – log file to use for the client's :attr:`logger`
+            * **log_requests** (``bool``) - if ``True``, the logs from :mod:`requests`
+              will be added to the client's ``log_file``
+
+        """
+        #: The base API URL
+        self.BASE_URL: str = ("http" if local else "https") + f"://{domain}/rest/V1/"
+        self.oauth_config: Dict[str, str, str, str] = {
+            'token': token,
+            'token_secret': token_secret,
+            'resource_owner_key': resource_owner_key,
+            'resource_owner_secret': resource_owner_secret
+        }
+        #: The Magento store domain
+        self.domain: str = domain
+        #: The store view code to request/update data on
+        self.scope: str = scope
+        #: The user agent to use in requests
+        self.user_agent: str = user_agent if user_agent else get_agent()
+        #: The :class:`~.MagentoLogger` for the domain/username combination
+        self.logger: logging.Logger = logger if logger else MagentoLogger(domain, log_level, **kwargs)
+        #: An initialized :class:`Store` object
+        self.store: Store = Store(self)
+
+        if kwargs.get('login', True):
+            self.validate()
+
+    def authenticate(self) -> bool:
+        return True
+
+    def request(self, method: str, url: str, payload: dict = None) -> requests.Response:
+        """Sends an authorized API request. Used for all internal requests
+
+        .. tip:: Use :meth:`get`, :meth:`post`, :meth:`put` or :meth:`delete` instead
+
+        :param method: the request method
+        :param url: the url to send the request to
+        :param payload: the JSON payload for the request (if the method is ``POST`` or ``PUT``)
+        """
+        session = OAuth1Session(
+            client_key=self.oauth_config['token'],
+            client_secret=self.oauth_config['token_secret'],
+            resource_owner_key=self.oauth_config['resource_owner_key'],
+            resource_owner_secret=self.oauth_config['resource_owner_secret']
+        )
+        method = method.upper()
+        if method in ('GET', 'DELETE'):
+            response = session.request(method, url, headers=self.headers)
+        elif method in ('POST', 'PUT'):
+            if payload:
+                response = session.request(method, url, json=payload, headers=self.headers)
+            else:
+                raise ValueError('Must provide a non-empty payload')
+        else:
+            raise ValueError('Invalid request method provided')
+
+        if response.status_code == 401:
+            self.logger.debug("Attempting to re-authenticate...")
+            # self.authenticate()  # Will raise AuthenticationError if unsuccessful (won't recurse infinitely)
+            return self.request(method, url, payload)
+
+        if response.status_code != 200:  # All non 401 responses are returned; errors are logged then handled by methods
+            self.logger.error("Request to {} failed with status code {}.\n{message}".format(
+                url, response.status_code, message=MagentoError.parse(response))
+            )
+
+        return response
