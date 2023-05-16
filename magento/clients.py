@@ -141,6 +141,24 @@ class Client:
                 return self.BASE_URL + endpoint
         return self.BASE_URL.replace('/V1', f'/{scope}/V1') + endpoint
 
+    # def async_url_for(self, url: str) -> str:
+    #     """Converts a regular API url to an asynchronous API url. This is required for
+    #     POST, PUT, PATCH, and DELETE requests.
+    #
+    #     .. admonition:: Example
+    #         :class: example
+    #
+    #         ::
+    #         # Generate the url for credit memo with id 7
+    #         >> api = Client("domain.com", "user", "password")
+    #         >> url = api.url_for('creditmemo/7')
+    #         >> api.async_url_for(url)
+    #         "https://domain.com/async/V1/creditmemo/7"
+    #
+    #     :param url: the regular API url
+    #     """
+    #     return url.replace('/rest/', '/async/')
+
     def search(self, endpoint: str) -> SearchQuery:
         """Initializes and returns a :class:`~.SearchQuery` corresponding to the specified endpoint
 
@@ -476,8 +494,8 @@ class OauthClient(Client):
     def __init__(
         self,
         domain: str,
-        token: str,
-        token_secret: str,
+        client_key: str,
+        client_secret: str,
         resource_owner_key: str,
         resource_owner_secret: str,
         scope: Optional[str] = '',
@@ -503,8 +521,6 @@ class OauthClient(Client):
 
 
         :param domain: domain name of the Magento store (ex. ``domain.com`` or ``127.0.0.1/magento24``)
-        :param username: username of the Magento Admin account
-        :param password: password of the Magento Admin account
         :param scope: the store view scope to :meth:`~search` and make requests on
         :param local: whether the Magento store is hosted locally
         :param user_agent: the user agent to use in requests
@@ -524,8 +540,8 @@ class OauthClient(Client):
         #: The base API URL
         self.BASE_URL: str = ("http" if local else "https") + f"://{domain}/rest/V1/"
         self.oauth_config: Dict[str, str, str, str] = {
-            'token': token,
-            'token_secret': token_secret,
+            'client_key': client_key,
+            'client_secret': client_secret,
             'resource_owner_key': resource_owner_key,
             'resource_owner_secret': resource_owner_secret
         }
@@ -540,9 +556,6 @@ class OauthClient(Client):
         #: An initialized :class:`Store` object
         self.store: Store = Store(self)
 
-        if kwargs.get('login', True):
-            self.validate()
-
     def authenticate(self) -> bool:
         return True
 
@@ -556,17 +569,18 @@ class OauthClient(Client):
         :param payload: the JSON payload for the request (if the method is ``POST`` or ``PUT``)
         """
         session = OAuth1Session(
-            client_key=self.oauth_config['token'],
-            client_secret=self.oauth_config['token_secret'],
+            client_key=self.oauth_config['client_key'],
+            client_secret=self.oauth_config['client_secret'],
             resource_owner_key=self.oauth_config['resource_owner_key'],
-            resource_owner_secret=self.oauth_config['resource_owner_secret']
+            resource_owner_secret=self.oauth_config['resource_owner_secret'],
+            signature_method='HMAC-SHA256',
         )
         method = method.upper()
         if method in ('GET', 'DELETE'):
-            response = session.request(method, url, headers=self.headers)
+            response = session.request(method, url)
         elif method in ('POST', 'PUT'):
             if payload:
-                response = session.request(method, url, json=payload, headers=self.headers)
+                response = session.request(method, url, json=payload)
             else:
                 raise ValueError('Must provide a non-empty payload')
         else:
@@ -583,3 +597,16 @@ class OauthClient(Client):
             )
 
         return response
+
+    def validate(self) -> bool:
+        """Validates the :attr:`~.token` by sending an authorized request to a standard API endpoint
+
+        :raises: :class:`~.AuthenticationError` if the token is invalid
+        """
+        response = self.get(self.url_for('store/websites'))
+        if response.status_code == 200:
+            self.logger.debug("Token validated successfully")
+            return True
+        else:
+            msg = "Token validation failed"
+            raise AuthenticationError(self, msg=msg, response=response)

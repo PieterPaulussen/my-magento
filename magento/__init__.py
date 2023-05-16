@@ -8,6 +8,7 @@ import os
 __version__ = "2.1.1"
 
 Client = clients.Client
+OauthClient = clients.OauthClient
 logger = utils.MagentoLogger(
     name=utils.MagentoLogger.PACKAGE_LOG_NAME,
     log_file=utils.MagentoLogger.PACKAGE_LOG_NAME + '.log',

@@ -226,6 +226,32 @@ class SearchQuery:
             group=self.last_group + 1,
         )
 
+    def updated_since(self, sinceDate: str = None) -> Self:
+        """Retrieve items for which ``updated_at >= sinceDate``
+
+        :param sinceDate: the date for response data to start from
+        :return: the calling :class:`~SearchQuery`
+        """
+        return self.add_criteria(
+            field='updated_at',
+            value=sinceDate,
+            condition='gteq',
+            group=self.last_group + 1,
+        )
+
+    def updated_until(self, toDate: str) -> Self:
+        """Retrieve items for which ``updated_at <= toDate``
+
+        :param toDate: the date for response data to end at (inclusive)
+        :return: the calling :class:`~SearchQuery`
+        """
+        return self.add_criteria(
+            field='updated_at',
+            value=toDate,
+            condition='lteq',
+            group=self.last_group + 1,
+        )
+
     @cached_property
     def result(self) -> Optional[Model | List[Model]]:
         """The result of the search query, wrapped by the :class:`~.Model` corresponding to the endpoint
