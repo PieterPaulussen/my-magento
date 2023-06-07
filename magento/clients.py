@@ -141,24 +141,6 @@ class Client:
                 return self.BASE_URL + endpoint
         return self.BASE_URL.replace('/V1', f'/{scope}/V1') + endpoint
 
-    # def async_url_for(self, url: str) -> str:
-    #     """Converts a regular API url to an asynchronous API url. This is required for
-    #     POST, PUT, PATCH, and DELETE requests.
-    #
-    #     .. admonition:: Example
-    #         :class: example
-    #
-    #         ::
-    #         # Generate the url for credit memo with id 7
-    #         >> api = Client("domain.com", "user", "password")
-    #         >> url = api.url_for('creditmemo/7')
-    #         >> api.async_url_for(url)
-    #         "https://domain.com/async/V1/creditmemo/7"
-    #
-    #     :param url: the regular API url
-    #     """
-    #     return url.replace('/rest/', '/async/')
-
     def search(self, endpoint: str) -> SearchQuery:
         """Initializes and returns a :class:`~.SearchQuery` corresponding to the specified endpoint
 
