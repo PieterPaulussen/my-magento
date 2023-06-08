@@ -482,7 +482,6 @@ class OauthClient(Client):
         resource_owner_secret: str,
         scope: Optional[str] = '',
         local: bool = False,
-        user_agent: Optional[str] = None,
         logger: Optional[logging.Logger] = None,
         log_level: str = 'INFO',
         **kwargs
@@ -531,8 +530,6 @@ class OauthClient(Client):
         self.domain: str = domain
         #: The store view code to request/update data on
         self.scope: str = scope
-        #: The user agent to use in requests
-        self.user_agent: str = user_agent if user_agent else get_agent()
         #: The :class:`~.MagentoLogger` for the domain/username combination
         self.logger: logging.Logger = logger if logger else MagentoLogger(domain, log_level, **kwargs)
         #: An initialized :class:`Store` object

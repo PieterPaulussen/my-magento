@@ -30,16 +30,37 @@ def get_api(**kwargs) -> Client:
     :param kwargs: any valid kwargs for :class:`~.Client`
     :raises ValueError: if login credentials are missing
     """
+    oath_client = kwargs.get('oath', os.getenv('MAGENTO_OAUTH'))
+
     credentials = {
         'domain': kwargs.get('domain', os.getenv('MAGENTO_DOMAIN')),
-        'username': kwargs.get('username', os.getenv('MAGENTO_USERNAME')),
-        'password': kwargs.get('password', os.getenv('MAGENTO_PASSWORD')),
-        'local': kwargs.get('local', False),
+        'scope': kwargs.get('scope', os.getenv('MAGENTO_SCOPE')),
+
     }
+
+    if oath_client:
+        credentials.update(
+            {
+                'client_key': kwargs.get('client_key', os.getenv('MAGENTO_CLIENT_KEY')),
+                'client_secret': kwargs.get('client_secret', os.getenv('MAGENTO_CLIENT_SECRET')),
+                'resource_owner_key': kwargs.get('resource_owner_key', os.getenv('MAGENTO_RESOURCE_OWNER_KEY')),
+                'resource_owner_secret': kwargs.get('resource_owner_secret', os.getenv('MAGENTO_RESOURCE_OWNER_SECRET')),
+            }
+        )
+    else:
+        credentials.update(
+            {
+                'username': kwargs.get('username', os.getenv('MAGENTO_USERNAME')),
+                'password': kwargs.get('password', os.getenv('MAGENTO_PASSWORD')),
+                'local': kwargs.get('local', False),
+            }
+        )
+
     if bad_keys := [key for key in credentials if credentials[key] is None]:
         raise ValueError(f'Missing login credentials for {bad_keys}')
+    elif oath_client:
+        return OauthClient.from_dict(credentials)
     else:
         return Client.from_dict(credentials)
 
-
-logger.debug('Initialized MyMagento')
+# logger.debug('Initialized MyMagento')
